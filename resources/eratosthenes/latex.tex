@@ -1,0 +1,43 @@
+\documentclass{article}
+\makeatletter
+\newcommand{\@crossout}[3]{%
+  \ifnum#1>#3\relax
+  \else
+    \expandafter\gdef\csname
+        isprime@\number#1\endcsname{F}%
+    \expandafter\@crossout\expandafter
+        {\number\numexpr#1+#2\relax}{#2}{#3}%
+  \fi
+}
+\newcommand{\sieve}[1]{%
+  \count1=2
+  \loop
+    \expandafter\gdef\csname
+        isprime@\the\count1\endcsname{T}%
+    \ifnum\count1<#1 \advance\count1 by 1 \repeat
+  \count1=2
+  \loop
+    \expandafter\if T\csname
+        isprime@\the\count1\endcsname
+      \edef\tempstart{\number\numexpr\count1*\count1\relax}%
+      \edef\tempstep{\the\count1}%
+      \expandafter\@crossout\expandafter
+          {\tempstart}{\tempstep}{#1}%
+    \fi
+    \ifnum\numexpr\count1*\count1\relax<#1
+      \advance\count1 by 1
+  \repeat
+  \count1=2
+  \def\prime@sep{}%
+  \loop
+    \expandafter\if T\csname
+        isprime@\the\count1\endcsname 
+      \prime@sep\the\count1 %
+      \gdef\prime@sep{, }%
+    \fi
+    \ifnum\count1<#1 \advance\count1 by 1 \repeat
+}
+\makeatother
+\begin{document}
+\sieve{50}
+\end{document}

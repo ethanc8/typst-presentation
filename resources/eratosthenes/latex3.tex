@@ -1,0 +1,32 @@
+\documentclass{article}
+\ExplSyntaxOn
+\intarray_new:Nn \isprime {10001} 
+\seq_new:N \l_sieve_results_seq
+\NewDocumentCommand{\sieve}{m}{
+  \seq_clear:N \l_sieve_results_seq
+  \int_step_inline:nnnn{2}{1}{#1}{
+    \intarray_gset:Nnn\isprime{##1}{1}
+  }
+  \int_step_inline:nnnn{2}{1}{
+      \fp_to_int:n{floor(sqrt(#1))}}{
+    \int_compare:nNnT{
+        \intarray_item:Nn\isprime{##1}}={1}{
+      \int_step_variable:nnnNn{##1*##1}{##1}{#1}
+        \l_tmp_int{
+        \intarray_gset:Nnn\isprime{\l_tmp_int}{0}
+      }
+    }
+  }
+  \int_step_inline:nnnn{2}{1}{#1}{
+    \int_compare:nNnT{
+        \intarray_item:Nn\isprime{##1}}={1}{
+      \seq_put_right:Nn\l_sieve_results_seq{##1}
+    }
+  }
+  \seq_use:Nn\l_sieve_results_seq{,~}
+}
+\ExplSyntaxOff
+
+\begin{document}
+\sieve{50}
+\end{document}
