@@ -1772,8 +1772,8 @@ $ func(1,2,3; 4,5,6) $
 
 ```
 #import "@preview/tiaoma:0.3.0": barcode
-#barcode("https://github.com/ethanc8/typst-intro", "QRCode")
+#barcode("https://github.com/ethanc8/typst-presentation", "QRCode")
 ```
-#barcode("https://github.com/ethanc8/typst-intro", "QRCode", options: (scale: 3.0))
+#barcode("https://github.com/ethanc8/typst-presentation", "QRCode", options: (scale: 3.0))
  
-#text(fill: blue, underline(link("https://github.com/ethanc8/typst-intro")))
+#text(fill: blue, underline(link("https://github.com/ethanc8/typst-presentation")))

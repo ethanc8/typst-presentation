@@ -2,6 +2,8 @@
 
 A presentation about Typst for the UIUC SIGPLAN, which was given at the weekly meeting on 2026-09-09 17:00 CDT.
 
+[<big>**Download PDF**</big>](https://raw.githubusercontent.com/ethanc8/typst-presentation/main/presentation.pdf)
+
 ## Building
 
 To compile the presentation, run
